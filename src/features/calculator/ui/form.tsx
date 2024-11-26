@@ -7,6 +7,7 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
+import {showBadge} from "#/features/calculator";
 
 interface TierInputFormProps {
     onCalculate: (data: {
@@ -22,6 +23,9 @@ export const TierInputForm: FC<TierInputFormProps> = ({ onCalculate }) => {
     const [currentExp, setCurrentExp] = useState(0);
     const [targetTier, setTargetTier] = useState(6);
     const [mode, setMode] = useState<"All Pick" | "Turbo">("All Pick");
+
+    const currentBadge = showBadge({ level: currentTier})
+    const targetBadge = showBadge({ level: targetTier})
 
     const [errors, setErrors] = useState<{
         currentTier?: string;
@@ -69,18 +73,30 @@ export const TierInputForm: FC<TierInputFormProps> = ({ onCalculate }) => {
             }}
         >
             <Typography variant="h5" textAlign="center">
-                Калькулятор тира Dota 2
+                Калькулятор уровня героя Dota 2
             </Typography>
-            <TextField
-                label="Текущий тир"
-                type="number"
-                value={currentTier}
-                onChange={(e) => setCurrentTier(Number(e.target.value))}
-                error={!!errors.currentTier}
-                helperText={errors.currentTier}
-                fullWidth
-                required
-            />
+            <Box sx={{
+                display: 'flex',
+                gap: "8px",
+                alignItems: "center",
+
+            }}>
+                <TextField
+                    label="Текущий тир"
+                    type="number"
+                    value={currentTier}
+                    onChange={(e) => setCurrentTier(Number(e.target.value))}
+                    error={!!errors.currentTier}
+                    helperText={errors.currentTier}
+                    fullWidth
+                    required
+                />
+                <img
+                    src={currentBadge}
+                    alt="Ваш уровень"
+                    style={{width: "64px", height: "64px"}}
+                />
+            </Box>
             <TextField
                 label="Текущий опыт"
                 type="number"
@@ -89,16 +105,28 @@ export const TierInputForm: FC<TierInputFormProps> = ({ onCalculate }) => {
                 fullWidth
                 required
             />
-            <TextField
-                label="Желаемый тир"
-                type="number"
-                value={targetTier}
-                onChange={(e) => setTargetTier(Number(e.target.value))}
-                error={!!errors.targetTier}
-                helperText={errors.targetTier}
-                fullWidth
-                required
-            />
+            <Box sx={{
+                display: 'flex',
+                gap: "8px",
+                alignItems: "center",
+
+            }}>
+                <TextField
+                    label="Желаемый тир"
+                    type="number"
+                    value={targetTier}
+                    onChange={(e) => setTargetTier(Number(e.target.value))}
+                    error={!!errors.targetTier}
+                    helperText={errors.targetTier}
+                    fullWidth
+                    required
+                />
+                <img
+                    src={targetBadge}
+                    alt="Желаемый уровень"
+                    style={{width: "64px", height: "64px"}}
+                />
+            </Box>
             <Select
                 value={mode}
                 onChange={(e) => setMode(e.target.value as "All Pick" | "Turbo")}

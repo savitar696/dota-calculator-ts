@@ -1,6 +1,6 @@
 import {createRoot} from "react-dom/client";
 import {StrictMode} from "react";
-import {Core} from "#/app/core.tsx";
+import {Core} from "#/app/core";
 
 const root = document.querySelector("#app")
 

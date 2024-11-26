@@ -1,3 +1,5 @@
+import {bronzeBadge, goldBadge, grandmasterBadge, ironBadge, masterBadge, platinumBadge} from "#/shared/icons";
+
 interface TierData {
     level: number;
     xpToNextLevel: number;
@@ -36,3 +38,24 @@ export const tiers: TierData[] = [
     { level: 29, xpToNextLevel: 3000, totalXP: 46250 },
     { level: 30, xpToNextLevel: 3100, totalXP: 49350 },
 ];
+
+export const showBadge = ({ level }: { level: number }) => {
+    if (level <= 5) {
+        return bronzeBadge;
+    }
+    if (level >= 6 && level <= 11) {
+        return ironBadge;
+    }
+    if (level >= 12 && level <= 17) {
+        return goldBadge;
+    }
+    if (level >= 18 && level <= 24) {
+        return platinumBadge;
+    }
+    if (level >= 25 && level <= 29) {
+        return masterBadge;
+    }
+    if (level >= 30) {
+        return grandmasterBadge;
+    }
+}
